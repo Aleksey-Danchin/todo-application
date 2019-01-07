@@ -2,7 +2,7 @@ const actionPanel1Element = document.getElementById('actionPanel1')
 const actionPanel2Element = document.getElementById('actionPanel2')
 const inputElement = document.getElementById('input')
 const listElement = document.getElementById('list')
-let todoList = []
+let todoList = JSON.parse(getCookie('todoList') || "[]")
 
 inputElement.addEventListener('keydown', event => {
 	const isEnter = event.code === 'Enter' || event.keyCode === 13
@@ -80,6 +80,8 @@ function updateView () {
 
 	actionPanel1Element.style.display = selectedModeFlag ? 'none' : 'flex'
 	actionPanel2Element.style.display = selectedModeFlag ? 'block' : 'none'
+
+	setCookie('todoList', JSON.stringify(todoList), { expires: 1e10, path: '/' })
 }
 
 function getSelectedModeFlag () {
